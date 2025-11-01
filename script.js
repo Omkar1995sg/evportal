@@ -107,64 +107,21 @@ dayjs.extend(dayjs_plugin_customParseFormat);
       e.preventDefault();
       const payload = {
         eventName: document.getElementById('f_eventName').value.trim(),
-        eventDate: document.getElementById('f_eventDate').value, // yyyy-mm-dd (from input[type=date])
+        eventDate: document.getElementById('f_eventDate').value, // yyyy-mm-dd
         studentName: document.getElementById('f_studentName').value.trim(),
         email: document.getElementById('f_email').value.trim(),
         contact: document.getElementById('f_contact').value.trim(),
         class: document.getElementById('f_class').value.trim(),
         year: document.getElementById('f_year').value
       };
-
-      // quick validation
-      for (const [k,v] of Object.entries(payload)) {
-        if (!v) { showToast('Please fill all fields.'); return; }
-      }
-
-      // endpoint check
-      if (typeof REGISTER_ENDPOINT !== 'string' || !REGISTER_ENDPOINT || /PASTE_APPS_SCRIPT_WEB_APP_URL_HERE/.test(REGISTER_ENDPOINT)) {
-        showToast('Registration endpoint not configured. Add your Apps Script Web App URL in script.js.', 5000);
-        return;
-      }
-
       try {
-        const res = await fetch(REGISTER_ENDPOINT, {
+        if (!endpointReady()) { showToast('Registration endpoint not configured. Please set REGISTER_ENDPOINT.'); return; }
+const res = await fetch(REGISTER_ENDPOINT, { 
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           mode: 'cors'
-        });
-        if (!res.ok) {
-          // Apps Script often returns 200; if not ok, still try to parse
-          console.warn('Non-OK response', res.status);
-        }
-        let json = null;
-        try { json = await res.json(); } catch {}
-        if (json && json.ok) {
-          closeRegister();
-          // open thanks modal
-          const tm = document.getElementById('thanksModal');
-          tm.classList.add('open'); tm.setAttribute('aria-hidden','false');
-          await loadRegistrations();
-          renderCharts();
-        } else {
-          showToast('Could not submit registration (server error).', 4500);
-          console.error('Registration error body:', json);
-        }
-      } catch (err) {
-        console.error(err);
-        showToast('Network error while submitting. Check your Apps Script deployment.', 5000);
-      }
-    });
-
-    // Thanks modal close
-    const thanksModal = document.getElementById('thanksModal');
-    document.getElementById('btnThanksClose').addEventListener('click', () => {
-      thanksModal.classList.remove('open');
-      thanksModal.setAttribute('aria-hidden','true');
-    });
-    thanksModal.addEventListener('click', (e) => { if (e.target === thanksModal) { 
-      thanksModal.classList.remove('open'); thanksModal.setAttribute('aria-hidden','true'); 
-    }});
+         });
         if (!res.ok) throw new Error('Failed to register');
         showToast('Registration submitted successfully ✅');
         closeRegister();
