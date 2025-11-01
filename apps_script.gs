@@ -4,7 +4,7 @@
  *
  * Replace these constants before deploying.
  */
-const SPREADSHEET_ID = "1eRiAPsfPQPfNf3uXPxBivyA-xuAE6mYCS6pykwHrzjU"; // e.g., 1AbC... from the sheet URL
+const SPREADSHEET_ID = "PASTE_YOUR_SPREADSHEET_ID_HERE"; // e.g., 1AbC... from the sheet URL
 const REGISTRATIONS_SHEET_NAME = "Registrations";
 
 function doOptions(e) {
