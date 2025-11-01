@@ -6,7 +6,7 @@ dayjs.extend(dayjs_plugin_customParseFormat);
     // 2) CSV published link for the Registrations sheet (used for charts; optional but recommended)
     const REGISTRATIONS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWv-ZF8XtzA9K4jMm4wQL-oAO226SUqWWCFLsT0lwxobkMhQMWorDdAGbD_hVkLPj5XhUj9GNMngr-/pub?gid=172924638&single=true&output=csv";
     // 3) Google Apps Script Web App URL that appends a row into Registrations
-    const REGISTER_ENDPOINT = "https://script.google.com/macros/s/AKfycbxl8aM2Hua0chiixtitqw6nxIrbzsOY7VBE1HtvHcR864qpHj3brdY_-4rypnVWae4/exec";
+    const REGISTER_ENDPOINT = "https://script.google.com/macros/s/AKfycbxQ4OrhgYDmowwgpYVJb3GPBq4aAKVY0o3vTV2QghNgj3QWElquiN6Fe-BwpMizCyU/exec";
 
     // ====== UTIL ======
     function parseDateFlexible(value) {
