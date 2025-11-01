@@ -115,12 +115,13 @@ dayjs.extend(dayjs_plugin_customParseFormat);
         year: document.getElementById('f_year').value
       };
       try {
-        const res = await fetch(REGISTER_ENDPOINT, {
+        if (!endpointReady()) { showToast('Registration endpoint not configured. Please set REGISTER_ENDPOINT.'); return; }
+const res = await fetch(REGISTER_ENDPOINT, { 
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           mode: 'cors'
-        });
+         });
         if (!res.ok) throw new Error('Failed to register');
         showToast('Registration submitted successfully ✅');
         closeRegister();
@@ -195,6 +196,47 @@ dayjs.extend(dayjs_plugin_customParseFormat);
       renderCharts();
     }
     init();
+
+// ====== SAFETY: Check endpoint configured ======
+function endpointReady() {
+  return typeof REGISTER_ENDPOINT === 'string' && REGISTER_ENDPOINT && !/PASTE_APPS_SCRIPT_WEB_APP_URL_HERE/.test(REGISTER_ENDPOINT);
+}
+
+// ====== Ensure openRegister is defined early ======
+function _openRegisterInternal(ev) {
+  document.getElementById('f_eventName').value = ev['Event Name'] || '';
+  const d = parseDateFlexible(ev.Date);
+  document.getElementById('f_eventDate').value = fmtDateForInput(d);
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+// Replace previous openRegister wrapper if present
+openRegister = function(ev) {
+  if (typeof isSignedIn === 'function' && !isSignedIn()) {
+    showToast('Please sign in first to register.');
+    const m = document.getElementById('signinModal');
+    if (m) { m.classList.add('open'); m.setAttribute('aria-hidden','false'); }
+    return;
+  }
+  _openRegisterInternal(ev);
+};
+
+// Delegate clicks for dynamically rendered buttons (extra safety)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  if (btn.textContent.trim() === 'Register' && btn.dataset.ev) {
+    try {
+      const ev = JSON.parse(decodeURIComponent(btn.dataset.ev));
+      openRegister(ev);
+    } catch (err) {
+      console.error('Bad event payload', err);
+      showToast('Could not open registration form.');
+    }
+  }
+});
+
 
 
 // ====== AUTH ======
