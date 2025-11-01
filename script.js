@@ -66,7 +66,7 @@ dayjs.extend(dayjs_plugin_customParseFormat);
             <div class="meta-item">⏰ ${ev.Time || 'TBA'}</div>
             <div class="meta-item">🎤 ${ev.Speaker || 'TBA'}</div>
           </div>
-          <button class="btn" ${isPast ? 'disabled' : ''} data-ev='${encodeURIComponent(JSON.stringify(ev))}'>Register</button>
+          <button class="btn btn-register" ${isPast ? 'disabled' : ''} data-ev='${encodeURIComponent(JSON.stringify(ev))}'>Register</button>
         `;
         const btn = card.querySelector('button');
         if (!isPast) {
@@ -312,3 +312,28 @@ openRegister = function(ev) {
 
 // On load
 updateAuthUI();
+
+
+// Global delegation for Register button
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.btn-register');
+  if (!btn || btn.disabled) return;
+  try {
+    const ev = JSON.parse(decodeURIComponent(btn.dataset.ev));
+    if (typeof isSignedIn === 'function' && !isSignedIn()) {
+      showToast('Please sign in first to register.');
+      const m = document.getElementById('signinModal');
+      if (m) { m.classList.add('open'); m.setAttribute('aria-hidden','false'); }
+      return;
+    }
+    document.getElementById('f_eventName').value = ev['Event Name'] || '';
+    const d = parseDateFlexible(ev.Date);
+    document.getElementById('f_eventDate').value = fmtDateForInput(d);
+    const modal = document.getElementById('registerModal');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  } catch (err) {
+    console.error('Register click error', err);
+    showToast('Could not open form.');
+  }
+});
