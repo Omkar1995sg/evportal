@@ -116,12 +116,12 @@ dayjs.extend(dayjs_plugin_customParseFormat);
       };
       try {
         if (!endpointReady()) { showToast('Registration endpoint not configured. Please set REGISTER_ENDPOINT.'); return; }
-const res = await fetch(REGISTER_ENDPOINT, { 
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          mode: 'cors'
-         });
+const res = await fetch(REGISTER_ENDPOINT, {
+  method: 'POST',
+  headers: { 'Content-Type': 'text/plain;charset=utf-8' },  // ✅ no preflight; Apps Script friendly
+  body: JSON.stringify(payload),
+  mode: 'cors'
+});
         if (!res.ok) throw new Error('Failed to register');
         showToast('Registration submitted successfully ✅');
         closeRegister();
