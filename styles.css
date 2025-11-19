@@ -87,6 +87,6 @@ input, select { width: 100%; background: #0f1530; border: 1px solid rgba(255,255
 .menu { display:flex; align-items:center; gap: 16px; }
 .menu-link { color: var(--text); opacity: 0.85; font-weight: 600; }
 .menu-link:hover { opacity: 1; text-decoration: underline; }
-.logo-img { width:36px; height:36px; border-radius:10px; background:#0a0f20; box-shadow: 0 0 0 2px rgba(255,255,255,0.08) inset; }
+.logo-img { width:60px; height:60px; border-radius:10px; background:#0a0f20; box-shadow: 0 0 0 2px rgba(255,255,255,0.08) inset; }
 .btn-small { padding: 8px 12px; border-radius: 10px; font-size: 14px; }
 .user-status { color: var(--muted); font-size: 13px; padding: 6px 10px; border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; }
