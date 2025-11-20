@@ -46,8 +46,8 @@ html, body {
 
 /* FIXED SMALL LOGO */
 .logo-img {
-  width: 60px;
-  height: 60px;
+  width: 150px;
+  height: 150px;
   border-radius: 10px;
   background: #0a0f20;
   object-fit: cover;
