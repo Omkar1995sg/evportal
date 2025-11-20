@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -36,21 +37,10 @@
         <div class="muted">Loaded from your <strong>Events</strong> sheet in Google Sheets (CSV publish).</div>
         <div id="eventsGrid" class="grid"></div>
       </div>
-      <div class="panel">
-        <h2>Insights</h2>
-        <div class="muted">Auto-updates from your sheets.</div>
-        <div class="charts">
-          <div>
-            <canvas id="chartEventsByMonth" height="200"></canvas>
-          </div>
-          <div>
-            <canvas id="chartRegistrationsByEvent" height="200"></canvas>
-          </div>
-        </div>
-      </div>
+
+      <!-- INSIGHTS PANEL REMOVED HERE -->
     </div>
 
-    
     <div id="about" class="panel" style="margin-top:22px;">
       <h2>About Us</h2>
       <div class="muted">We host tech talks, workshops, hackathons, and cultural events throughout the year.</div>
@@ -65,7 +55,6 @@
     <div class="footer">Made with ❤ using HTML, CSS & JS · Charts by Chart.js · Data from Google Sheets</div>
   </div>
 
-  
   <!-- Sign In Modal -->
   <div id="signinModal" class="modal" aria-hidden="true">
     <div class="sheet">
@@ -89,7 +78,6 @@
       </form>
     </div>
   </div>
-
 
   <!-- Register Modal -->
   <div id="registerModal" class="modal" aria-hidden="true">
