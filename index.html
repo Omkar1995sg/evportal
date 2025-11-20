@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TILAK MAHARASHTRA VIDYAPEETH EVENTS PORTAL</title>
-
+  <title>TILAK MAHARASHTRA VIDHAPEETH EVENTS PORTAL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Libraries (Charts removed because Insights removed) -->
+  <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/dayjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/plugin/customParseFormat.js"></script>
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-
     <div class="nav">
-      <a class="brand" href="#home"><img class="logo-img" src="tmv.png" alt="Logo"/></a>
-      <div class="site-title">TILAK MAHARASHTRA VIDYAPEETH EVENTS PORTAL</div>
+      <a class="brand" href="#home"><img class="logo-img" src="tmv.png" alt="Logo"/> </a>
       <nav class="menu">
         <a href="#home" class="menu-link">Home</a>
         <a href="#events" class="menu-link">Upcoming Events</a>
@@ -30,34 +27,32 @@
         <button id="btnSignIn" class="btn btn-small">Sign In</button>
         <div id="userStatus" class="user-status" style="display:none;"></div>
       </nav>
+    </div>T.M.V Event Portal</div>
+      <div class="pill">Google Sheets · Charts</div>
     </div>
 
-    <div class="pill">Google Sheets · Event Portal</div>
-
     <div id="home" class="hero">
-
-      <!-- Upcoming Events -->
       <div id="events" class="panel">
         <h2>Upcoming Events</h2>
         <div class="muted">Loaded from your <strong>Events</strong> sheet in Google Sheets (CSV publish).</div>
         <div id="eventsGrid" class="grid"></div>
       </div>
 
+      <!-- INSIGHTS PANEL REMOVED HERE -->
     </div>
 
     <div id="about" class="panel" style="margin-top:22px;">
       <h2>About Us</h2>
       <div class="muted">We host tech talks, workshops, hackathons, and cultural events throughout the year.</div>
-      <p style="margin-top:10px;">This portal lets students discover events and register easily.</p>
+      <p style="margin-top:10px;">This portal lets students discover events, register easily, and track campus buzz with beautiful charts.</p>
     </div>
 
     <div id="contact" class="panel" style="margin-top:22px;">
       <h2>Contact Us</h2>
-      <div class="muted">Have questions? Reach us at <a href="mailto:events@college.edu">events@college.edu</a>.</div>
+      <div class="muted">Have questions? Reach us at <a href="mailto:events@college.edu">events@college.edu</a> or visit the Student Activity Center.</div>
     </div>
 
-    <div class="footer">Made with using HTML, CSS & JS · Data from Google Sheets</div>
-
+    <div class="footer">Made with ❤ using HTML, CSS & JS · Charts by Chart.js · Data from Google Sheets</div>
   </div>
 
   <!-- Sign In Modal -->
@@ -102,22 +97,39 @@
         <div class="row">
           <div>
             <label>Student Name</label>
-            <input name="studentName" id="f_studentName" required />
+            <input name="studentName" id="f_studentName" placeholder="Your full name" required />
           </div>
           <div>
             <label>Email</label>
-            <input name="email" id="f_email" type="email" required />
+            <input name="email" id="f_email" type="email" placeholder="you@example.com" required />
           </div>
         </div>
         <div class="row">
           <div>
             <label>Contact</label>
-            <input name="contact" id="f_contact" type="tel" required pattern="[0-9]{10}" />
+            <input name="contact" id="f_contact" type="tel" placeholder="10-digit phone" required pattern="[0-9]{10}" />
           </div>
           <div>
             <label>Class</label>
-            <input name="class" id="f_class" required />
+            <input name="class" id="f_class" placeholder="e.g., FYBCA" required />
           </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Year</label>
+            <select name="year" id="f_year" required>
+              <option value="">Select year</option>
+              <option>FY</option>
+              <option>SY</option>
+              <option>TY</option>
+              <option>FE</option>
+              <option>SE</option>
+              <option>TE</option>
+              <option>BE</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div></div>
         </div>
         <div class="actions">
           <button type="button" class="btn ghost" id="btnCancel">Cancel</button>
